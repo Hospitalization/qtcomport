@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QWidget *verticalLayoutWidget = new QWidget(this);
     QVBoxLayout *verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-    int nLabel= 3;
+    int nLabel= QSerialPortInfo::availablePorts().count();
     this->resize(QSize(374, 50 * nLabel));
     QLabel *label[nLabel];
     for(int i = 0; i < nLabel; i++)
@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
         qDebug() << serialPortInfo.portName();
+        qDebug() << serialPortInfo.description();
 
     }
 }
