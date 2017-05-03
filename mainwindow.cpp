@@ -15,26 +15,21 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget *verticalLayoutWidget = new QWidget(this);
     QVBoxLayout *verticalLayout = new QVBoxLayout(verticalLayoutWidget);
     int nLabel= QSerialPortInfo::availablePorts().count();
-    this->resize(QSize(374, 50 * nLabel));
+    this->resize(QSize(480, 50 * nLabel));
     QLabel *label[nLabel];
-    for(int i = 0; i < nLabel; i++)
-    {
-        label[i] = new QLabel(verticalLayoutWidget);
-        label[i]->setText("Label");
-        verticalLayout->addWidget(label[i]);
-    }
-
-    //verticalLayout->alignment();
-    //verticalLayoutWidget->raise();
-    this->setCentralWidget(verticalLayoutWidget);
-
+    int i = 0;
     qDebug() << "Number of serial ports:" << QSerialPortInfo::availablePorts().count();
     foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
         qDebug() << serialPortInfo.portName();
         qDebug() << serialPortInfo.description();
-
+        label[i] = new QLabel(verticalLayoutWidget);
+        label[i]->setText(serialPortInfo.portName() + ":" + serialPortInfo.description());
+        verticalLayout->addWidget(label[i]);
+        i++;
     }
+
+    this->setCentralWidget(verticalLayoutWidget);
 }
 
 MainWindow::~MainWindow()

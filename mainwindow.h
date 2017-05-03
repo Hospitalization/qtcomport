@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QApplication>
+#include <QDesktopWidget>
 
 namespace Ui {
 class MainWindow;
