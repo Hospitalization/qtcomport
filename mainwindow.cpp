@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QtSerialPort/qserialportinfo.h>
-#include <QtSerialPort/QSerialPort>
-#include <QDebug>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,27 +8,44 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QWidget *verticalLayoutWidget = new QWidget(this);
-    QVBoxLayout *verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-    int nLabel= QSerialPortInfo::availablePorts().count();
-    this->resize(QSize(480, 50 * nLabel));
-    QLabel *label[nLabel];
-    int i = 0;
-    qDebug() << "Number of serial ports:" << QSerialPortInfo::availablePorts().count();
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-    {
-        qDebug() << serialPortInfo.portName();
-        qDebug() << serialPortInfo.description();
-        label[i] = new QLabel(verticalLayoutWidget);
-        label[i]->setText(serialPortInfo.portName() + ":" + serialPortInfo.description());
-        verticalLayout->addWidget(label[i]);
-        i++;
-    }
+    connect(this, SIGNAL(signalListRefresh()), this, SLOT(listRefresh()));
 
-    this->setCentralWidget(verticalLayoutWidget);
+    emit signalListRefresh();
+//    listRefresh();
 }
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::listRefresh(){
+    ui->listWidget->clear();
+    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+//        qDebug() << serialPortInfo.portName();
+//        qDebug() << serialPortInfo.description();
+        ui->listWidget->addItem(serialPortInfo.portName() + ":" + serialPortInfo.description());
+    }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->close();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    emit signalListRefresh();
+//    listRefresh();
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event) {
+m_nMouseClick_X_Coordinate = event->x();
+m_nMouseClick_Y_Coordinate = event->y();
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event) {
+move(event->globalX()-m_nMouseClick_X_Coordinate,event->globalY()-m_nMouseClick_Y_Coordinate);
 }
