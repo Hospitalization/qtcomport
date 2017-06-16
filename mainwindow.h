@@ -19,7 +19,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 private:
-    PortDetectThread *p_thread;
+    PortDetectThread *pThread;
+    QList<QSerialPortInfo> portList;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -30,6 +31,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void listCompare();
     void listRefresh();
 
 signals:

@@ -8,28 +8,39 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    p_thread = new PortDetectThread(this);
-    connect(p_thread, SIGNAL(detect()), this, SLOT(listRefresh()));
+    pThread = new PortDetectThread(this);
+    connect(pThread, SIGNAL(detect()), this, SLOT(listCompare()));
 
     connect(this, SIGNAL(signalListRefresh()), this, SLOT(listRefresh()));
     //emit signalListRefresh();
-
-    p_thread->start();
+    //portList = QSerialPortInfo::availablePorts();
+    pThread->start();
 }
 
 
 MainWindow::~MainWindow()
 {
-    p_thread->terminate();
+    pThread->terminate();
     delete ui;
 }
 
+void MainWindow::listCompare(){
+    QList<QSerialPortInfo> portListNew = QSerialPortInfo::availablePorts();
+
+    if(portList.size() == portListNew.size()){
+        return;
+    }else{
+        listRefresh();
+    }
+
+}
+
 void MainWindow::listRefresh(){
+
+    portList = QSerialPortInfo::availablePorts();
     ui->listWidget->clear();
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    foreach (const QSerialPortInfo &serialPortInfo, portList)
     {
-//        qDebug() << serialPortInfo.portName();
-//        qDebug() << serialPortInfo.description();
         ui->listWidget->addItem(serialPortInfo.portName() + ":" + serialPortInfo.description());
     }
 }
