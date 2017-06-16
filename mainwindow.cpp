@@ -8,15 +8,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(this, SIGNAL(signalListRefresh()), this, SLOT(listRefresh()));
+    p_thread = new PortDetectThread(this);
+    connect(p_thread, SIGNAL(detect()), this, SLOT(listRefresh()));
 
-    emit signalListRefresh();
-//    listRefresh();
+    connect(this, SIGNAL(signalListRefresh()), this, SLOT(listRefresh()));
+    //emit signalListRefresh();
+
+    p_thread->start();
 }
 
 
 MainWindow::~MainWindow()
 {
+    p_thread->terminate();
     delete ui;
 }
 
@@ -32,13 +36,13 @@ void MainWindow::listRefresh(){
 
 void MainWindow::on_pushButton_clicked()
 {
-    this->close();
+    //this->close();
+    QApplication::quit();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     emit signalListRefresh();
-//    listRefresh();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {

@@ -9,6 +9,8 @@
 #include <QtSerialPort/QSerialPort>
 #include <QDebug>
 
+#include "portdetectthread.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,6 +18,8 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+private:
+    PortDetectThread *p_thread;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
