@@ -30,4 +30,5 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     portdetectthread.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    portchange.ui

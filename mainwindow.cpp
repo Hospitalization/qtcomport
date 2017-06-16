@@ -12,8 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pThread, SIGNAL(detect()), this, SLOT(listCompare()));
 
     connect(this, SIGNAL(signalListRefresh()), this, SLOT(listRefresh()));
-    //emit signalListRefresh();
-    //portList = QSerialPortInfo::availablePorts();
     pThread->start();
 }
 
@@ -45,22 +43,32 @@ void MainWindow::listRefresh(){
     }
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_pushButton_Refresh_clicked()
+{
+    emit signalListRefresh();
+}
+void MainWindow::on_pushButton_PortChange_clicked()
+{
+    qDebug()<<ui->listWidget->currentIndex().row();
+}
+void MainWindow::on_pushButton_Quit_clicked()
 {
     //this->close();
     QApplication::quit();
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    emit signalListRefresh();
-}
-
 void MainWindow::mousePressEvent(QMouseEvent *event) {
-m_nMouseClick_X_Coordinate = event->x();
-m_nMouseClick_Y_Coordinate = event->y();
+    m_nMouseClick_X_Coordinate = event->x();
+    m_nMouseClick_Y_Coordinate = event->y();
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
-move(event->globalX()-m_nMouseClick_X_Coordinate,event->globalY()-m_nMouseClick_Y_Coordinate);
+    move(event->globalX()-m_nMouseClick_X_Coordinate,event->globalY()-m_nMouseClick_Y_Coordinate);
+}
+
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    qDebug()<<ui->listWidget->currentIndex().row();
 }

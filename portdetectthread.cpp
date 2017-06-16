@@ -3,10 +3,10 @@
 PortDetectThread::PortDetectThread(QObject *parent) :
     QThread(parent)
 {
-    printf("Thread new\n");
+    qDebug()<<"new";
 }
 PortDetectThread::~PortDetectThread(){
-    printf("Thread end\n");
+    qDebug()<<"end";
 }
 
 void PortDetectThread::run()

@@ -2,6 +2,7 @@
 #define PORTDETECTTHREAD_H
 #include <QtCore>
 #include <QThread>
+#include <QDebug>
 
 class PortDetectThread : public QThread
 {

@@ -8,6 +8,7 @@
 #include <QtSerialPort/qserialportinfo.h>
 #include <QtSerialPort/QSerialPort>
 #include <QDebug>
+#include <QListWidgetItem>
 
 #include "portdetectthread.h"
 
@@ -27,12 +28,16 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_Quit_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_pushButton_Refresh_clicked();
 
     void listCompare();
     void listRefresh();
+
+    void on_pushButton_PortChange_clicked();
+
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
 signals:
     void signalListRefresh();

@@ -68,14 +68,21 @@
          <number>2</number>
         </property>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_Refresh">
           <property name="text">
            <string>Refresh</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="pushButton_PortChange">
+          <property name="text">
+           <string>Port Change</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_Quit">
           <property name="text">
            <string>Quit</string>
           </property>
