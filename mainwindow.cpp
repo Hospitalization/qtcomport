@@ -54,7 +54,6 @@ void MainWindow::on_pushButton_PortChange_clicked()
 }
 void MainWindow::on_pushButton_Quit_clicked()
 {
-    //this->close();
     QApplication::quit();
 }
 
@@ -70,5 +69,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    qDebug()<<ui->listWidget->currentIndex().row();
+//    qDebug()<<ui->listWidget->currentIndex().row();
+//    portwindow *pw = new portwindow();
+//    pw->setWindowFlags(Qt::Window  | Qt::WindowStaysOnTopHint | Qt::SubWindow | Qt::FramelessWindowHint);
+//    QRect rec = QApplication::desktop()->screenGeometry();
+//    int height = rec.height();
+//    int width = rec.width();
+//    pw->move(width * 5/10, height * 5/10);
+//    pw->show();
 }

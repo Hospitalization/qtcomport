@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    portdetectthread.cpp
+    portdetectthread.cpp \
+    portwindow.cpp
 
 HEADERS  += mainwindow.h \
-    portdetectthread.h
+    portdetectthread.h \
+    portwindow.h
 
 FORMS    += mainwindow.ui \
-    portchange.ui
+    portwindow.ui

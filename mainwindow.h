@@ -11,6 +11,7 @@
 #include <QListWidgetItem>
 
 #include "portdetectthread.h"
+#include "portwindow.h"
 
 namespace Ui {
 class MainWindow;
