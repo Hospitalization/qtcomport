@@ -39,7 +39,15 @@ void MainWindow::listRefresh(){
     ui->listWidget->clear();
     foreach (const QSerialPortInfo &serialPortInfo, portList)
     {
-        ui->listWidget->addItem(serialPortInfo.portName() + ":" + serialPortInfo.description());
+        QString description = serialPortInfo.description();
+        QStringList descriptions = description.split(" ");
+        int descLength = descriptions.length();
+        if(descLength<3){
+            ui->listWidget->addItem(serialPortInfo.portName() + ":" + description);
+        }else{
+            QString temp = descriptions[descLength-1].append(" ").append(descriptions[descLength-2]).append(" ").append(descriptions[descLength-3]);
+            ui->listWidget->addItem(serialPortInfo.portName() + ":" + "..."+ temp);
+        }
     }
 }
 
@@ -69,12 +77,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-//    qDebug()<<ui->listWidget->currentIndex().row();
-//    portwindow *pw = new portwindow();
-//    pw->setWindowFlags(Qt::Window  | Qt::WindowStaysOnTopHint | Qt::SubWindow | Qt::FramelessWindowHint);
-//    QRect rec = QApplication::desktop()->screenGeometry();
-//    int height = rec.height();
-//    int width = rec.width();
-//    pw->move(width * 5/10, height * 5/10);
-//    pw->show();
+    qDebug()<<ui->listWidget->currentIndex().row();
+    portwindow *pw = new portwindow();
+    pw->setWindowFlags(Qt::WindowStaysOnTopHint);
+    QRect rec = QApplication::desktop()->screenGeometry();
+    int height = rec.height();
+    int width = rec.width();
+    pw->move(width * 5/10, height * 5/10);
+    pw->show();
 }
