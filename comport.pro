@@ -34,3 +34,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     portwindow.ui
+
+RESOURCES += \
+    qtresource.qrc

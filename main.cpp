@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
 
 //    w.setAttribute(Qt::WA_TranslucentBackground);    // transparent
 //    w.setMask(); // transparent by pixmap
-
+    QIcon icon("icon/icon.ico");
+    w.setWindowIcon(icon);
     QRect rec = QApplication::desktop()->screenGeometry();
     int height = rec.height();
     int width = rec.width();
